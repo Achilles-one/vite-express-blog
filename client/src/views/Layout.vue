@@ -27,7 +27,9 @@
         <RouterView />
       </el-main>
 
-      <el-aside width="200px" style="border: 1px solid #000">Aside</el-aside>
+      <el-aside width="350px" style="border: 1px solid #000">
+        <Author></Author>
+      </el-aside>
     </el-container>
   </el-container>
 </template>
@@ -35,6 +37,7 @@
 <script setup>
 import { ref, inject, reactive, h, onMounted, computed, watch } from "vue";
 import { useRouter, useRoute, RouterLink, RouterView } from "vue-router";
+import Author from "../components/Author.vue";
 const router = useRouter();
 const route = useRoute();
 
@@ -125,7 +128,7 @@ const scrolling = () => {
   width: 100%;
   position: fixed;
   top: 0;
-  background: #998c8c;
+  background: #f8fcf2;
   box-shadow: 0px 3px 7px 0px rgba(70, 70, 70, 0.35);
   transition: all 0.3s; //添加过渡，优化体验，具体可以根据需求扩展
 }
@@ -138,5 +141,9 @@ const scrolling = () => {
 .midcontain {
   width: 1280px;
   margin: 0 auto;
+  min-height: calc(100vh - 60px);
+}
+.el-aside {
+  padding: 20px;
 }
 </style>

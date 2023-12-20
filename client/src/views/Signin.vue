@@ -1,6 +1,6 @@
 <template>
   <el-card shadow="hover" class="box-card">
-    <div class="card-header">欢迎登录</div>
+    <div class="card-header">欢迎注册</div>
     <el-form
       label-position="right"
       label-width="100px"
@@ -16,6 +16,13 @@
           placeholder="请输入帐号"
         />
       </el-form-item>
+      <el-form-item label="邮箱" prop="email">
+        <el-input
+          v-model="admin.email"
+          @keydown.enter.prevent
+          placeholder="请输入邮箱"
+        />
+      </el-form-item>
       <el-form-item label="密码" prop="password">
         <el-input
           v-model="admin.password"
@@ -27,16 +34,17 @@
 
       <el-form-item>
         <el-space wrap>
-          <el-checkbox v-model="admin.remeber" label="记住我" size="large" />
-          <el-button type="primary" @click="login(ruleFormRef)">登录</el-button>
+          <el-button type="primary" @click="signin(ruleFormRef)"
+            >注册</el-button
+          >
           <el-button @click="router.push('/home')">返回</el-button>
         </el-space>
       </el-form-item>
 
       <el-form-item>
-        没有帐号，<span class="smallbtn" @click="router.push('/signin')"
-          >注册</span
-        >一个
+        已有帐号，点击<span class="smallbtn" @click="router.push('/login')"
+          >登录</span
+        >
       </el-form-item>
     </el-form>
   </el-card>
@@ -57,6 +65,7 @@ let rules = {
     { required: true, message: "请输入账号", trigger: "blur" },
     { min: 3, max: 12, message: "账号长度在3到12个字符", trigger: "blur" },
   ],
+  email: [{ required: true, message: "请输入邮箱", trigger: "blur" }],
   password: [
     { required: true, message: "请输入密码", trigger: "blur" },
     { min: 6, max: 18, message: "密码长度在6到18个字符", trigger: "blur" },
@@ -64,12 +73,12 @@ let rules = {
 };
 
 const admin = reactive({
-  account: localStorage.getItem("account") || "",
-  password: localStorage.getItem("password") || "",
-  remeber: localStorage.getItem("remeber") == 1 || false,
+  account: "",
+  password: "",
+  email: "",
 });
 
-const login = async (formEl) => {
+const signin = async (formEl) => {
   if (!formEl) {
     return;
   } else {
@@ -77,7 +86,7 @@ const login = async (formEl) => {
       if (valid) {
         console.log(admin);
       } else {
-        ElMessage.error("请输入帐号密码");
+        ElMessage.error("请输入帐号邮箱密码");
       }
     });
   }
