@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/userList', (req, res, next) => {
   // sql查询user表
-  db.query('SELECT * FROM user', [], function (results, fields) {
+  db.query('SELECT * FROM admin', [], function (results, fields) {
     // 以json的形式返回
     res.json({ results })
   })
