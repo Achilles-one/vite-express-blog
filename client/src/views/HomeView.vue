@@ -7,8 +7,11 @@
 
     <el-container>
       <el-main>
-        <div>{{ articel.title }}</div>
-        <div>{{ articel.abstract }}</div>
+        <div class="arttitle" @click="goArticle(articel)">
+          {{ articel.title }}
+        </div>
+        <div class="artcontent">{{ articel.abstract }}</div>
+
         <el-space>
           <svg-icon iconClass="icon-zan"></svg-icon>
           <svg-icon iconClass="icon-comment"></svg-icon>
@@ -57,6 +60,11 @@ const article_list = reactive([
     id: "3",
   },
 ]);
+
+const goArticle = (article) => {
+  console.log(article);
+  router.push("/article");
+};
 </script>
 
 <style lang="scss" scoped>
@@ -67,5 +75,19 @@ const article_list = reactive([
 .image {
   width: 100%;
   height: 100px;
+}
+
+.el-main {
+  --el-main-padding: 10px 10px 10px 0;
+}
+.arttitle {
+  font-size: 16px;
+  font-weight: 600;
+  padding-bottom: 10px;
+}
+.artcontent {
+  font-size: 15px;
+  padding-bottom: 10px;
+  min-height: 50px;
 }
 </style>
